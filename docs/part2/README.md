@@ -1,4 +1,4 @@
-## 注释
+## 注释 <sup class="new">(new)</sup>
 
 > `单行注释`
 
@@ -209,4 +209,33 @@ print   raise   return     try       while      with        yield
     ].concat(window.$docsify.plugins || []))
 })()
 //# sourceMappingURL=docsify-copy-code.min.js.map
+```
+
+| 表头     | 表头   |
+| -------- | ------ |
+| 单元格 2 | 单元格 |
+| 单元格   | 单元格 |
+
+```mermaid
+sssssssss
+```
+
+```dot
+digraph g {
+    a; b; 搜索;
+a -> b -> c -> c;
+
+table1 [label=<
+<table>
+    <tr>
+        <td port="one">1</td>
+        <td>2</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>4</td>
+    </tr>
+</table>
+>];
+}
 ```

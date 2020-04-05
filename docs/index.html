@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="En">
   <head>
     <meta charset="UTF-8" />
-    <title>Document</title>
+    <title></title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="description" content="Description" />
     <meta
@@ -22,7 +22,7 @@
       // mermaid.initialize({ startOnLoad: false })
       window.$docsify = {
         logo: 'https://www.python.org/static/img/python-logo@2x.png',
-        fallbackLanguages: ['En', 'English'],
+        fallbackLanguages: ['En', 'zh-CH'],
         // 完整配置参数
         search: {
           maxAge: 86400000, // 过期时间，单位毫秒，默认一天
@@ -46,14 +46,48 @@
           // 搜索标题的最大程级, 1 - 6
           depth: 2,
         },
+        plugins: [
+          function (hook) {
+            var url = 'https://github.com/caiwu2252711582/docs/'
+            var editHtml = '[📝 BY CAIWU](' + url + ')\n'
+            var footer = [
+              '<hr/>',
+              '<footer>',
+              '<span><a href="https://github.com/caiwu2252711582/docs/">python-doc</a> &copy;2020.</span>',
+              '<span>Proudly published by <a href="https://github.com/caiwu2252711582/docs/" target="_blank">caiwu</a>.</span>',
+              '<span style="float:right">',
+              'update time {docsify-updated} ',
+              '</span>',
+              '</footer>',
+            ].join('')
+
+            hook.beforeEach(function (html) {
+              return html + footer
+            })
+          },
+        ],
+        formatUpdated: '{MM}/{DD} {HH}:{mm}',
+        mergeNavbar: true,
+        autoHeader: true,
         maxLevel: 2,
-        coverpage: true,
-        loadSidebar: true,
-        loadNavbar: true,
+        coverpage: '封面.md',
+        loadSidebar: '目录.md',
+        loadNavbar: '导航.md',
+        mergeNavbar: true,
         onlyCover: true,
         subMaxLevel: 2,
         name: 'caiwu',
         repo: 'https://github.com/caiwu2252711582/docs',
+        markdown: {
+          renderer: {
+            code: function (code, lang) {
+              if (lang === 'dot') {
+                return '<div class="viz">' + Viz(code, 'SVG') + '</div>'
+              }
+              return this.origin.code.apply(this, arguments)
+            },
+          },
+        },
       }
     </script>
     <script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
@@ -62,5 +96,6 @@
     <script src="//unpkg.com/docsify/lib/plugins/emoji.js"></script>
     <script src="./copy.js"></script>
     <script src="//unpkg.com/docsify/lib/plugins/zoom-image.js"></script>
+    <script src="https://cdn.bootcss.com/viz.js/1.8.0/viz.js"></script>
   </body>
 </html>
