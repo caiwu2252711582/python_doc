@@ -62,7 +62,30 @@ result = num1 + num2 #把num1和num2这两个"菜篮子"中的数据进行累加
 
 > 变量的类型
 
-![logo](../img/1.png ':size=800x500')
+```dot
+digraph g {
+  rankdir = LR;
+  //edge[style=dashed]; //定义边的样式, 虚线
+  node[peripheries=2, style=filled, color="#eecc80"];
+  变量类型;
+  node[peripheries=2, style=filled, color="#99aaff"];
+  变量类型->Numbers //[color=red, style=dashed]; //定义边的颜色, 红色 (b和方括号之间必须有空格)
+  Numbers->int;
+  Numbers->long;
+  Numbers->float;
+  Numbers->complex;
+  node[peripheries=2, style=filled, color="#99aa99"];
+  变量类型->Tuple（元组）;
+  变量类型->String;
+  变量类型->List;
+  变量类型->Dictionary（字典）;
+  node[peripheries=2, style=filled, color="#ff9900"];
+  变量类型->Bool;
+  Bool->False;
+  Bool->True;
+
+}
+```
 
 ## 关键字
 
@@ -78,164 +101,4 @@ and     as      assert     break     class      continue    def     del
 elif    else    except     exec      finally    for         from    global
 if      in      import     is        lambda     not         or      pass
 print   raise   return     try       while      with        yield
-```
-
-```js
-/*!
- * docsify-copy-code
- * v2.1.0
- * https://github.com/jperasmus/docsify-copy-code
- * (c) 2017-2019 JP Erasmus <jperasmus11@gmail.com>
- * MIT license
- */
-!(function () {
-  'use strict'
-  function r(o) {
-    return (r =
-      'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
-        ? function (o) {
-            return typeof o
-          }
-        : function (o) {
-            return o &&
-              'function' == typeof Symbol &&
-              o.constructor === Symbol &&
-              o !== Symbol.prototype
-              ? 'symbol'
-              : typeof o
-          })(o)
-  }
-  !(function (o, e) {
-    void 0 === e && (e = {})
-    var t = e.insertAt
-    if (o && 'undefined' != typeof document) {
-      var n = document.head || document.getElementsByTagName('head')[0],
-        c = document.createElement('style')
-      ;(c.type = 'text/css'),
-        'top' === t && n.firstChild
-          ? n.insertBefore(c, n.firstChild)
-          : n.appendChild(c),
-        c.styleSheet
-          ? (c.styleSheet.cssText = o)
-          : c.appendChild(document.createTextNode(o))
-    }
-  })(
-    '.docsify-copy-code-button,.docsify-copy-code-button span{cursor:pointer;transition:all .25s ease}.docsify-copy-code-button{position:absolute;z-index:1;top:0;right:0;overflow:visible;padding:.65em .8em;border:0;border-radius:0;outline:0;font-size:1em;background:grey;background:var(--theme-color,grey);color:#fff;opacity:0}.docsify-copy-code-button span{border-radius:3px;background:inherit;pointer-events:none}.docsify-copy-code-button .error,.docsify-copy-code-button .success{position:absolute;z-index:-100;top:50%;left:0;padding:.5em .65em;font-size:.825em;opacity:0;-webkit-transform:translateY(-50%);transform:translateY(-50%)}.docsify-copy-code-button.error .error,.docsify-copy-code-button.success .success{opacity:1;-webkit-transform:translate(-115%,-50%);transform:translate(-115%,-50%)}.docsify-copy-code-button:focus,pre:hover .docsify-copy-code-button{opacity:1}'
-  ),
-    document.querySelector('link[href*="docsify-copy-code"]') &&
-      console.warn(
-        '[Deprecation] Link to external docsify-copy-code stylesheet is no longer necessary.'
-      ),
-    (window.DocsifyCopyCodePlugin = {
-      init: function () {
-        return function (o, e) {
-          o.ready(function () {
-            console.warn(
-              '[Deprecation] Manually initializing docsify-copy-code using window.DocsifyCopyCodePlugin.init() is no longer necessary.'
-            )
-          })
-        }
-      },
-    }),
-    (window.$docsify = window.$docsify || {}),
-    (window.$docsify.plugins = [
-      function (o, s) {
-        o.doneEach(function () {
-          var o = Array.apply(
-              null,
-              document.querySelectorAll('pre[data-lang]')
-            ),
-            c = {
-              buttonText: '复制代码',
-              errorText: 'Error',
-              successText: 'Copied',
-            }
-          s.config.copyCode &&
-            Object.keys(c).forEach(function (t) {
-              var n = s.config.copyCode[t]
-              'string' == typeof n
-                ? (c[t] = n)
-                : 'object' === r(n) &&
-                  Object.keys(n).some(function (o) {
-                    var e = -1 < location.href.indexOf(o)
-                    return (c[t] = e ? n[o] : c[t]), e
-                  })
-            })
-          var e = [
-            '<button class="docsify-copy-code-button">',
-            '<span class="label">'.concat(c.buttonText, '</span>'),
-            '<span class="error">'.concat(c.errorText, '</span>'),
-            '<span class="success">'.concat(c.successText, '</span>'),
-            '</button>',
-          ].join('')
-          o.forEach(function (o) {
-            o.insertAdjacentHTML('beforeend', e)
-          })
-        }),
-          o.mounted(function () {
-            document
-              .querySelector('.content')
-              .addEventListener('click', function (o) {
-                if (o.target.classList.contains('docsify-copy-code-button')) {
-                  var e =
-                      'BUTTON' === o.target.tagName
-                        ? o.target
-                        : o.target.parentNode,
-                    t = document.createRange(),
-                    n = e.parentNode.querySelector('code'),
-                    c = window.getSelection()
-                  t.selectNode(n), c.removeAllRanges(), c.addRange(t)
-                  try {
-                    document.execCommand('copy') &&
-                      (e.classList.add('success'),
-                      setTimeout(function () {
-                        e.classList.remove('success')
-                      }, 1e3))
-                  } catch (o) {
-                    console.error('docsify-copy-code: '.concat(o)),
-                      e.classList.add('error'),
-                      setTimeout(function () {
-                        e.classList.remove('error')
-                      }, 1e3)
-                  }
-                  'function' == typeof (c = window.getSelection()).removeRange
-                    ? c.removeRange(t)
-                    : 'function' == typeof c.removeAllRanges &&
-                      c.removeAllRanges()
-                }
-              })
-          })
-      },
-    ].concat(window.$docsify.plugins || []))
-})()
-//# sourceMappingURL=docsify-copy-code.min.js.map
-```
-
-| 表头     | 表头   |
-| -------- | ------ |
-| 单元格 2 | 单元格 |
-| 单元格   | 单元格 |
-
-```mermaid
-sssssssss
-```
-
-```dot
-digraph g {
-    a; b; 搜索;
-a -> b -> c -> c;
-
-table1 [label=<
-<table>
-    <tr>
-        <td port="one">1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>3</td>
-        <td>4</td>
-    </tr>
-</table>
->];
-}
 ```

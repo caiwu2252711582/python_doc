@@ -47,21 +47,18 @@
           depth: 2,
         },
         plugins: [
-          function (hook) {
-            var url = 'https://github.com/caiwu2252711582/docs/'
-            var editHtml = '[📝 BY CAIWU](' + url + ')\n'
-            var footer = [
-              '<hr/>',
-              '<footer>',
-              '<span><a href="https://github.com/caiwu2252711582/docs/">python-doc</a> &copy;2020.</span>',
-              '<span>Proudly published by <a href="https://github.com/caiwu2252711582/docs/" target="_blank">caiwu</a>.</span>',
-              '<span style="float:right">',
-              'update time {docsify-updated} ',
-              '</span>',
-              '</footer>',
-            ].join('')
-
+          function (hook, vm) {
             hook.beforeEach(function (html) {
+              var footer = [
+                '<hr/>',
+                '<footer style="color:#999">',
+                '<span>Copyright &copy;2020 </span>',
+                '<span>Powered by <a href="https://github.com/caiwu2252711582/docs/" target="_blank">caiwu</a></span>',
+                '<span style="float:right;color:#999">',
+                'Update time {docsify-updated} ',
+                '</span>',
+                '</footer>',
+              ].join('')
               return html + footer
             })
           },
